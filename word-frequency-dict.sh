@@ -20,9 +20,13 @@ echo $bookname
 echo $dictionary
 
 cat "$bookname"     | #Read in the text 
-  tr -cd [[:alpha:][="'"=][=" "=]] | #Remove all characters except letters, ', control characters, space characters
+  tr -cd [[:alpha:][="'"=][=" "=]] | #Remove all characters except letters, ',
   tr " " "\n"       | #Replace all space character with newline
   tr -d " "         | #Remove all space characters
   tr [:upper:] [:lower:] | #Convert all upper case to lower case
  # tr -d
-  awk 'NF'       #Remove empty lines
+  awk 'NF'   |    #Remove empty lines
+sort         | #Sort all words alphabetically 
+uniq -c      | #Remove all duplicates
+sort -nr
+
