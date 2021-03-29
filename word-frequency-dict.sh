@@ -20,8 +20,9 @@ echo $bookname
 echo $dictionary
 
 cat "$bookname"     | #Read in the text 
-  tr -cd [[:alpha:][="'"=][=" "=]] | #Remove all characters except letters, ',
+  tr -c [[:alpha:][="'"=][=" "=]] " " | #Remove all characters except letters, ',
   tr " " "\n"       | #Replace all space character with newline
+  sed 's/^\039//'      | #Replace apostrophe at the beginning of line
   tr -d " "         | #Remove all space characters
   tr [:upper:] [:lower:] | #Convert all upper case to lower case
  # tr -d
